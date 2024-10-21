@@ -11,7 +11,7 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          architecture: ppc64le
           cache: npm
       - name: Install dependencies
         run: npm ci
@@ -29,7 +30,7 @@ jobs:
 
   test:
     name: Test - ${{ matrix.node-version }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     strategy:
       fail-fast: false
       matrix:
@@ -41,6 +42,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          architecture: ppc64le
           cache: npm
       - name: Install dependencies
         run: npm ci
@@ -49,7 +51,7 @@ jobs:
 
   api:
     name: API & Doc Validation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,6 +59,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          architecture: ppc64le
           cache: npm
       - name: Install dependencies
         run: npm ci
